@@ -1,0 +1,320 @@
+/* Add this to your Generation.css file */
+
+.generation-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.generation-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.generation-header h1 {
+  color: #2a2a2a;
+  margin-bottom: 10px;
+}
+
+.generation-header p {
+  color: #666;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  position: relative;
+}
+
+.tab-button.active {
+  color: #0066cc;
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #0066cc;
+}
+
+/* Generate Tab */
+.generation-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.generation-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.generation-button,
+.action-button,
+.save-button {
+  padding: 12px 20px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.generation-button:hover,
+.action-button:hover,
+.save-button:hover {
+  background-color: #0052a3;
+}
+
+.generation-button:disabled,
+.action-button:disabled,
+.save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.generation-error {
+  color: #d9534f;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8d7da;
+  border-radius: 4px;
+}
+
+.generation-loading {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  text-align: center;
+  color: #666;
+}
+
+.generation-content {
+  margin-top: 20px;
+}
+
+.generation-idea {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.generation-idea h3 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.idea-content {
+  margin-bottom: 20px;
+}
+
+.idea-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-button {
+  background-color: #28a745;
+}
+
+.save-button:hover {
+  background-color: #218838;
+}
+
+.generation-preview {
+  margin-top: 30px;
+}
+
+.generation-preview h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.video-player {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Manage Tab */
+.manage-tab h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.ideas-list {
+  margin-bottom: 30px;
+}
+
+.no-ideas {
+  color: #666;
+  font-style: italic;
+}
+
+.idea-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.idea-title,
+.idea-concept {
+  font-weight: bold;
+  color: #0066cc;
+}
+
+.idea-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.action-button.edit {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.action-button.edit:hover {
+  background-color: #e0a800;
+}
+
+.action-button.delete {
+  background-color: #dc3545;
+}
+
+.action-button.delete:hover {
+  background-color: #c82333;
+}
+
+.action-button.select {
+  background-color: #5cb85c;
+}
+
+.action-button.select:hover {
+  background-color: #4cae4c;
+}
+
+.action-button.save {
+  background-color: #28a745;
+}
+
+.action-button.save:hover {
+  background-color: #218838;
+}
+
+.action-button.cancel {
+  background-color: #6c757d;
+}
+
+.action-button.cancel:hover {
+  background-color: #5a6268;
+}
+
+.action-button.add {
+  background-color: #17a2b8;
+}
+
+.action-button.add:hover {
+  background-color: #138496;
+}
+
+/* Form */
+.idea-form {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.idea-form h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Export Section */
+.export-section {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.export-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.export-content {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.export-content pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: monospace;
+}

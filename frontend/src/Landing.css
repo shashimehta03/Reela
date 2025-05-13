@@ -1,0 +1,150 @@
+/* Landing.css */
+
+.landing-container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-content {
+  width: 100%;
+  max-width: 1100px;
+  text-align: center;
+  animation: fadeUp 0.8s ease;
+  padding: 20px;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-title {
+  color: #2a2a2a;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.landing-subtitle {
+  color: #555;
+  font-size: 20px;
+  margin-bottom: 60px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+.landing-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.feature-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-title {
+  color: #0066cc;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.feature-description {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.landing-cta {
+  margin-top: 20px;
+}
+
+.landing-button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 102, 204, 0.2);
+}
+
+.landing-button:hover {
+  background-color: #0052a3;
+}
+
+.landing-button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .landing-title {
+    font-size: 32px;
+  }
+  
+  .landing-subtitle {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  
+  .landing-features {
+    gap: 20px;
+  }
+  
+  .feature-card {
+    padding: 25px 20px;
+  }
+  
+  .feature-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-content {
+    padding: 10px;
+  }
+  
+  .landing-title {
+    font-size: 28px;
+  }
+  
+  .landing-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .landing-button {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+}
