@@ -85,7 +85,9 @@ app.post('/upload', async (req, res) => {
 
 
 //mongodb connection
-mongoose.connect('mongodb://127.0.0.1:27017/otp-auth', {}
+// mongoose.connect('mongodb://127.0.0.1:27017/otp-auth', {}
+mongoose.connect('mongodb+srv://shashi:hNSZHDlN6uW09JL4@cluster0.kplpqwo.mongodb.net/otp-contentauth?retryWrites=true&w=majority&appName=Cluster0', {}
+
   // , { useNewUrlParser: true, useUnifiedTopology: true }
 )
   .then(() => console.log('Mongo Connected'))

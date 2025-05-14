@@ -3,6 +3,8 @@ import axios from 'axios';
 import ReactPlayer from 'react-player';
 import './Generation.css';
 import YouTubeShareForm from './YouTubeShareForm';
+import TabNavigation from './common/TabNavigation';
+import IdeaGeneratorForm from './generation/IdeaGeneratorForm';
 
 function Generation() {
   // States for original functionality
@@ -10,7 +12,6 @@ function Generation() {
   const [videoPreview, setVideoPreview] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [topic, setTopic] = useState('');
 
   // States for video ideas management
   const initialIdeas = [
@@ -36,22 +37,20 @@ function Generation() {
   const [newConcept, setNewConcept] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
-  const [activeTab, setActiveTab] = useState('generate'); // 'generate' or 'manage'
-
-  // State for YouTube Share Form visibility
+  const [activeTab, setActiveTab] = useState('generate');
   const [showYouTubeShareForm, setShowYouTubeShareForm] = useState(false);
 
-  // Original functions
-  const generateVideoIdea = async (e) => {
-    e.preventDefault();
-    if (!topic.trim()) return;
+  const tabs = [
+    { id: 'generate', name: 'Generate' },
+    { id: 'manage', name: 'Manage Ideas' },
+  ];
 
+  // Modified to accept topic as a parameter
+  const handleGenerateIdea = async (currentTopic) => {
     try {
       setLoading(true);
       setError('');
-      const res = await axios.post('http://localhost:5000/generate-idea', { topic });
-
-      // Format the idea into our structured format
+      const res = await axios.post('http://localhost:5000/generate-idea', { topic: currentTopic });
       const formattedIdea = formatGeneratedIdea(res.data.idea);
       setVideoIdea(formattedIdea);
     } catch (err) {
@@ -175,42 +174,16 @@ function Generation() {
         <h1>Video Content Generator</h1>
         <p>Transform your ideas into engaging video content</p>
 
-        {/* Tab Navigation */}
-        <div className="tab-navigation">
-          <button
-            className={`tab-button ${activeTab === 'generate' ? 'active' : ''}`}
-            onClick={() => setActiveTab('generate')}
-          >
-            Generate
-          </button>
-          <button
-            className={`tab-button ${activeTab === 'manage' ? 'active' : ''}`}
-            onClick={() => setActiveTab('manage')}
-          >
-            Manage Ideas
-          </button>
-        </div>
+        <TabNavigation
+          tabs={tabs}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
       </div>
 
       {activeTab === 'generate' ? (
         <div className="generate-tab">
-          <form className="generation-form" onSubmit={generateVideoIdea}>
-            <input
-              className="generation-input"
-              type="text"
-              placeholder="Enter your video topic"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              disabled={loading}
-            />
-            <button
-              className="generation-button"
-              type="submit"
-              disabled={loading || !topic.trim()}
-            >
-              {loading ? 'Generating...' : 'Generate Idea'}
-            </button>
-          </form>
+          <IdeaGeneratorForm onGenerate={handleGenerateIdea} loading={loading} />
 
           {error && <div className="generation-error">{error}</div>}
           {loading && <div className="generation-loading">Processing your request...</div>}
