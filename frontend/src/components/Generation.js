@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import ReactPlayer from 'react-player';
 import './Generation.css';
+import YouTubeShareForm from './YouTubeShareForm';
 
 function Generation() {
   // States for original functionality
@@ -10,7 +11,7 @@ function Generation() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [topic, setTopic] = useState('');
-  
+
   // States for video ideas management
   const initialIdeas = [
     {
@@ -37,16 +38,19 @@ function Generation() {
   const [editId, setEditId] = useState(null);
   const [activeTab, setActiveTab] = useState('generate'); // 'generate' or 'manage'
 
+  // State for YouTube Share Form visibility
+  const [showYouTubeShareForm, setShowYouTubeShareForm] = useState(false);
+
   // Original functions
   const generateVideoIdea = async (e) => {
     e.preventDefault();
     if (!topic.trim()) return;
-    
+
     try {
       setLoading(true);
       setError('');
       const res = await axios.post('http://localhost:5000/generate-idea', { topic });
-      
+
       // Format the idea into our structured format
       const formattedIdea = formatGeneratedIdea(res.data.idea);
       setVideoIdea(formattedIdea);
@@ -66,7 +70,7 @@ function Generation() {
 
   const generateVideoPreview = async () => {
     if (!videoIdea) return;
-    
+
     try {
       setLoading(true);
       setError('');
@@ -82,47 +86,47 @@ function Generation() {
   // Video ideas management functions
   const addVideoIdea = () => {
     if (newTitle.trim() === "" || newConcept.trim() === "") return;
-    
+
     const newIdea = {
       id: videoIdeas.length > 0 ? Math.max(...videoIdeas.map(idea => idea.id)) + 1 : 1,
       title: newTitle,
       concept: newConcept
     };
-    
+
     setVideoIdeas([...videoIdeas, newIdea]);
     setNewTitle("");
     setNewConcept("");
-    
+
     // Update the current videoIdea to display this new idea
     setVideoIdea(`Title: ${newIdea.title}\nConcept:${newIdea.concept}`);
   };
 
   const saveIdeaToLibrary = () => {
     if (!videoIdea) return;
-    
+
     // Parse the generated idea to extract title and concept
     // This is a simplified example assuming the AI generates in our format
     let title = "New Generated Idea";
     let concept = videoIdea;
-    
+
     // Try to extract title and concept from the formatted string
     const titleMatch = videoIdea.match(/\*\*Title:\*\*\s*(.*?)(?=\n\*\*Concept:|$)/i);
     const conceptMatch = videoIdea.match(/\*\*Concept:\*\*\s*(.*?)$/is);
-    
+
     if (titleMatch && titleMatch[1]) {
       title = titleMatch[1].trim();
     }
-    
+
     if (conceptMatch && conceptMatch[1]) {
       concept = conceptMatch[1].trim();
     }
-    
+
     const newIdea = {
       id: videoIdeas.length > 0 ? Math.max(...videoIdeas.map(idea => idea.id)) + 1 : 1,
       title: title,
       concept: concept
     };
-    
+
     setVideoIdeas([...videoIdeas, newIdea]);
     setActiveTab('manage');
   };
@@ -136,13 +140,13 @@ function Generation() {
 
   const saveEdit = () => {
     if (newTitle.trim() === "" || newConcept.trim() === "") return;
-    
-    setVideoIdeas(videoIdeas.map(idea => 
-      idea.id === editId 
-        ? { ...idea, title: newTitle, concept: newConcept } 
+
+    setVideoIdeas(videoIdeas.map(idea =>
+      idea.id === editId
+        ? { ...idea, title: newTitle, concept: newConcept }
         : idea
     ));
-    
+
     setEditMode(false);
     setEditId(null);
     setNewTitle("");
@@ -170,16 +174,16 @@ function Generation() {
       <div className="generation-header">
         <h1>Video Content Generator</h1>
         <p>Transform your ideas into engaging video content</p>
-        
+
         {/* Tab Navigation */}
         <div className="tab-navigation">
-          <button 
+          <button
             className={`tab-button ${activeTab === 'generate' ? 'active' : ''}`}
             onClick={() => setActiveTab('generate')}
           >
             Generate
           </button>
-          <button 
+          <button
             className={`tab-button ${activeTab === 'manage' ? 'active' : ''}`}
             onClick={() => setActiveTab('manage')}
           >
@@ -249,6 +253,12 @@ function Generation() {
                       height="auto"
                     />
                   </div>
+                  <button onClick={() => setShowYouTubeShareForm(true)}>share on youtube</button>
+                  {showYouTubeShareForm && videoPreview && (
+                    <YouTubeShareForm
+                      onCancel={() => setShowYouTubeShareForm(false)}
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -270,19 +280,19 @@ function Generation() {
                     <p><span className="idea-concept">Concept:</span> {idea.concept}</p>
                   </div>
                   <div className="idea-actions">
-                    <button 
+                    <button
                       className="action-button edit"
                       onClick={() => startEdit(idea)}
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       className="action-button delete"
                       onClick={() => deleteIdea(idea.id)}
                     >
                       Delete
                     </button>
-                    <button 
+                    <button
                       className="action-button select"
                       onClick={() => selectIdeaForGeneration(idea)}
                     >

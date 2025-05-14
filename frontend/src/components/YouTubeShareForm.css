@@ -1,0 +1,89 @@
+.youtube-share-form-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.youtube-share-form-container h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.youtube-share-form-container .form-group {
+    margin-bottom: 15px;
+}
+
+.youtube-share-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.youtube-share-form-container input[type=\"text\"],
+.youtube-share-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.youtube-share-form-container textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.youtube-share-form-container .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.youtube-share-form-container .share-button,
+.youtube-share-form-container .cancel-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.youtube-share-form-container .share-button {
+    background-color: #ff0000;
+    /* YouTube Red */
+    color: white;
+}
+
+.youtube-share-form-container .share-button:hover {
+    background-color: #cc0000;
+}
+
+.youtube-share-form-container .share-button:disabled {
+    background-color: #fcc;
+    cursor: not-allowed;
+}
+
+.youtube-share-form-container .cancel-button {
+    background-color: #eee;
+    color: #333;
+}
+
+.youtube-share-form-container .cancel-button:hover {
+    background-color: #ddd;
+}
+
+.youtube-share-form-container .share-error {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}

@@ -4,7 +4,10 @@ import Login from './components/Login';
 import PostLogin from './components/PostLogin';
 import Generation from './components/Generation';
 import Dashboard from './components/Dashboard';
+import YouTubeCallbackPage from './components/YouTubeCallbackPage';
+import NotFoundPage from './components/NotFoundPage';
 import { useState, useEffect } from 'react';
+
 
 function App() {
   const [isVerified, setIsVerified] = useState(() => {
@@ -46,7 +49,9 @@ function App() {
         />
         <Route path="/post-login" element={isVerified ? <PostLogin /> : <Navigate to="/login" />} />
         <Route path="/dashboard" element={isVerified ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/youtube-callback" element={<YouTubeCallbackPage />} />
         <Route path="/generate" element={isVerified ? <Generation /> : <Navigate to="/login" />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

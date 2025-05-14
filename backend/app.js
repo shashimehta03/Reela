@@ -7,6 +7,7 @@ const fs = require('fs');
 const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
+const { google } = require('googleapis');
 
 
 //  console.log(require('@ffmpeg-installer/ffmpeg').path);
@@ -16,15 +17,76 @@ ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
 const app = express();
 const PORT = 5000;
-const GEMINI_API_KEY ="AIzaSyDBD300wv8Qy-7LAwfP6FbWOfo8nnTiFWA";
+const GEMINI_API_KEY = "AIzaSyDBD300wv8Qy-7LAwfP6FbWOfo8nnTiFWA";
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 app.use(express.json());
 app.use(cors());
 
+const oauth2Client = new google.auth.OAuth2(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  process.env.REDIRECT_URI
+);
+// Step 1: Auth URL
+app.get('/auth-url', (req, res) => {
+  const scopes = ['https://www.googleapis.com/auth/youtube.upload'];
+  const url = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: scopes,
+  });
+  console.log("auth-url",url);
+  res.send({ url });
+});
+
+// Step 2: OAuth callback
+app.get('/oauth2callback', async (req, res) => {
+  const { code } = req.query;
+  const { tokens } = await oauth2Client.getToken(code);
+  oauth2Client.setCredentials(tokens);
+  console.log("get oauthcallback ke ander haii");
+  console.log(tokens);
+  res.redirect(`http://localhost:3000/youtube-callback?accessToken=${tokens.access_token}`);
+});
+
+// Step 3: Upload API
+app.post('/upload', async (req, res) => {
+
+  try {
+    console.log('upload routes ke ander haii');
+    const { accessToken, title, description, tags } = req.body;
+    oauth2Client.setCredentials({ access_token: accessToken });
+
+    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+
+    const response = await youtube.videos.insert({
+      part: 'snippet,status',
+      requestBody: {
+        snippet: {
+          title: title + ' #Shorts',
+          description,
+          tags,
+        },
+        status: {
+          privacyStatus: 'public',
+        },
+      },
+      media: {
+        body: fs.createReadStream('output/video_preview.mp4'), // path to your generated video
+      },
+    });
+
+    res.json({ success: true, data: response.data });
+    
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
 //mongodb connection
-mongoose.connect('mongodb://127.0.0.1:27017/otp-auth',{}
-    // , { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose.connect('mongodb://127.0.0.1:27017/otp-auth', {}
+  // , { useNewUrlParser: true, useUnifiedTopology: true }
 )
   .then(() => console.log('Mongo Connected'))
   .catch((err) => console.error(err));
@@ -149,7 +211,7 @@ app.post('/generate-video', async (req, res) => {
     // Prepare filter complex
     const filters = [];
     const streams = [];
-    
+
     lines.forEach((line, index) => {
       // Escape special characters in the text
       const escapedText = line

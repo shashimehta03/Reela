@@ -1,0 +1,53 @@
+.youtube-callback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.youtube-callback-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.youtube-callback-container p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.status-loading {
+    color: #007bff;
+}
+
+.status-success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-error {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.actions-home {
+    margin-top: 30px;
+}
+
+.home-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.home-link:hover {
+    background-color: #0056b3;
+}
