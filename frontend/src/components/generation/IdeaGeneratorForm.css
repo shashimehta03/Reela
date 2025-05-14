@@ -1,0 +1,16 @@
+.generation-form {
+    display: flex;
+    gap: 10px;
+    /* Consider if margin-bottom is generic enough or should be handled by parent */
+    margin-bottom: 20px;
+}
+
+.generation-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Button styles are expected to be provided by the parent context (e.g., Generation.css) */

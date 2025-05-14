@@ -1,0 +1,47 @@
+.generation-content {
+    margin-top: 20px;
+}
+
+.generation-idea {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    /* This might be adjusted if video preview is part of this component or separate */
+}
+
+.generation-idea h3 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.idea-content {
+    margin-bottom: 20px;
+}
+
+.idea-content p {
+    margin: 0 0 10px 0;
+    /* Basic paragraph styling within idea content */
+    line-height: 1.6;
+}
+
+.idea-content p:last-child {
+    margin-bottom: 0;
+}
+
+.idea-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Styles for the save-button, extending shared button styles from Generation.css */
+.save-button {
+    background-color: #28a745;
+    /* Green for save */
+}
+
+.save-button:hover {
+    background-color: #218838;
+}

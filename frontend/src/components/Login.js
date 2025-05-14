@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { AuthContext } from '../context/AuthContext';
 
-export default function Login({ onVerified }) {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const sendOtp = async () => {
     try {
@@ -30,7 +32,7 @@ export default function Login({ onVerified }) {
       setError('');
       const res = await axios.post('http://localhost:5000/api/auth/verify-otp', { email, otp });
       if (res.data.success) {
-        onVerified();
+        login();
         navigate('/post-login');
       } else {
         setError('Invalid OTP');
