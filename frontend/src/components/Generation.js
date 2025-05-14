@@ -226,7 +226,7 @@ function Generation() {
                       height="auto"
                     />
                   </div>
-                  <button onClick={() => setShowYouTubeShareForm(true)}>share on youtube</button>
+                  <button  className="action-button add" onClick={() => setShowYouTubeShareForm(true)}>share on youtube</button>
                   {showYouTubeShareForm && videoPreview && (
                     <YouTubeShareForm
                       onCancel={() => setShowYouTubeShareForm(false)}

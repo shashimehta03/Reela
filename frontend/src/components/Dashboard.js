@@ -56,8 +56,8 @@ const Dashboard = () => {
             <div className="quick-actions">
                 <h2>Quick Actions</h2>
                 <div className="action-buttons">
-                    <button className="btn btn-primary">Create New Video</button>
-                    <button className="btn btn-secondary">View All Videos</button>
+                    <button className="action-button add">Create New Video</button>
+                    <button className="action-button add">View All Videos</button>
                 </div>
             </div>
         </div>
